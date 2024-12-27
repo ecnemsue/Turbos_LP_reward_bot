@@ -158,12 +158,13 @@ console.log('try swap',swap_amount,'NS to SUI');
 
 
 async function open_position(lowerTick,Tickindex){	
+ let coinA_amount_current=Number((await client_sui.getBalance({owner:address,coinType:coinA})).totalBalance);
  let coinB_amount_current=Number((await client_sui.getBalance({owner:address,coinType:coinB})).totalBalance);
  let deposit_amount=coinB_amount_current;
 const tx = await sdk.pool.addLiquidity({
   pool: poolID,
   address: address,
-  amountA: Math.min(Math.floor(  (deposit_amount*20*(lowerTick+tickSpacing-Tickindex))/(1000*(Tickindex-lowerTick)) )  ,coinA_init-50*10**6),
+  amountA: Math.min(Math.floor(  (deposit_amount*20*(lowerTick+tickSpacing-Tickindex))/(1000*(Tickindex-lowerTick))   )  ,coinA_amount_current-50*10**6),
   amountB: deposit_amount-5*10**9,
   slippage: 99,
   tickLower:lowerTick,
