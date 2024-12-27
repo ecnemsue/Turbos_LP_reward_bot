@@ -38,9 +38,6 @@ let reqresult=await client
     }
 });
 return reqresult[reqresult.length-1].parsedJson;
-// let dice=parseInt(reqresult[0].parsedJson.outcome);
-// let sum=Math.floor(dice/6)+2+dice%6;
- // return sum;
 }
 async function get_event_craps(digest:string){
 const client = new JSONRPCClient((jsonRPCRequest) =>
@@ -150,9 +147,6 @@ let reqresult=await client
     }
 });
 return reqresult[0].parsedJson.position;
-// let dice=parseInt(reqresult[0].parsedJson.outcome);
-// let sum=Math.floor(dice/6)+2+dice%6;
- // return sum;
 }
 async function get_event_turbos(digest:string){
 const client = new JSONRPCClient((jsonRPCRequest) =>
@@ -188,9 +182,6 @@ let reqresult=await client
     }
 });
 return [reqresult[0].parsedJson.object_id,reqresult[2].parsedJson.liquidity];
-// let dice=parseInt(reqresult[0].parsedJson.outcome);
-// let sum=Math.floor(dice/6)+2+dice%6;
- // return sum;
 }
 
 
