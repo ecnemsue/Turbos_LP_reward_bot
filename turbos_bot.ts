@@ -263,14 +263,6 @@ try{
  pool = await sdk.pool.getPool(poolID);
 }catch{console.log('Get pool data failed');continue;}
 
-
-if (Math.abs(pool.tick_current_index.fields.bits-lastTick)>=0.5*tickSpacing){
-console.log('Great trend detected, bot stop 5 min....., at tick',pool.tick_current_index.fields.bits);
-await setTimeout(1000*60*5);	
-}
-
-
-
 if (Math.abs(pool.tick_current_index.fields.bits-lastTick)>=1*tickSpacing){
 console.log('attack detected, bot stop 20min....., at tick',pool.tick_current_index.fields.bits);
 await setTimeout(1000*60*20);	
@@ -281,6 +273,11 @@ await close_position(position_id,Liquidity);
 lastTick=0;
 position_id='';
 await setTimeout(300);	
+if (Math.abs(pool.tick_current_index.fields.bits-lastTick)>=0.5*tickSpacing){
+console.log('Great trend detected, bot stop 5 min....., at tick',pool.tick_current_index.fields.bits);
+await setTimeout(1000*60*5);	
+}
+	
 if (loopcount>120){
 open_count+=Math.floor(loopcount/120);
 }
