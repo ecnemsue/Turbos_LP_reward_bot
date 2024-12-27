@@ -157,9 +157,7 @@ console.log('try swap',swap_amount,'NS to SUI');
 
 
 
-async function open_position(lowerTick,Tickindex){	
- let coinA_amount_current=Number((await client_sui.getBalance({owner:address,coinType:coinA})).totalBalance);
- let coinB_amount_current=Number((await client_sui.getBalance({owner:address,coinType:coinB})).totalBalance);
+async function open_position(lowerTick,Tickindex,coinA_amount_current,coinB_amount_current){	
  let deposit_amount=coinB_amount_current;
 const tx = await sdk.pool.addLiquidity({
   pool: poolID,
@@ -240,7 +238,7 @@ fail_flag=0;
 continue;
 }
 try{
-digest_id=await open_position(lowerTick,tick_index);
+digest_id=await open_position(lowerTick,tick_index,coinA_amount_current,coinB_amount_current);
 }catch{console.log('Open position failed');continue;}
 lastTick=tick_index;
 open_count+=1;
